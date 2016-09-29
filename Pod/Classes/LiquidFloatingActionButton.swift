@@ -18,6 +18,8 @@ import QuartzCore
 @objc public protocol LiquidFloatingActionButtonDelegate {
     // selected method
     optional func liquidFloatingActionButton(liquidFloatingActionButton: LiquidFloatingActionButton, didSelectItemAtIndex index: Int)
+    // button tapped 
+    optional func liquidFloatingActionButtonTapped(liquidFloatingActionButton: LiquidFloatingActionButton)
 }
 
 public enum LiquidFloatingActionButtonAnimateStyle : Int {
@@ -229,11 +231,13 @@ public class LiquidFloatingActionButton : UIView {
     }
 
     private func didTapped() {
+
         if isClosed {
             open()
         } else {
             close()
         }
+        delegate?.liquidFloatingActionButtonTapped?(self)
     }
     
     public func didTappedCell(target: LiquidFloatingCell) {
